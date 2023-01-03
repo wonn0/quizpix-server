@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
 
 class Quiz(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
-    image = models.CharField(max_length = 255, null = True, blank = True)
+    image = models.CharField(max_length = 255, null = False, blank = True)
     title = models.CharField(max_length = 255, null = False, blank = False, default = 'My Quiz')
 
 class Question(models.Model):
@@ -39,7 +39,7 @@ class Question(models.Model):
     question = models.CharField(max_length = 255, null = False, blank = False)
     answer = models.CharField(max_length = 255, null = False, blank = False)
     choices = ArrayField(
-        models.CharField(max_length = 255),
+        models.CharField(max_length = 255, null = True, blank = False),
         size = 3,
     )
 
@@ -53,7 +53,7 @@ class Game(models.Model):
 
     quiz = models.ForeignKey(Quiz, on_delete = models.CASCADE)
     game_score = models.IntegerField(default = 0)
-    difficulty = models.CharField(max_length = 100, choices = DIFFICULTY_LEVELS, null = False, blank = False)
+    difficulty = models.CharField(max_length = 100, choices = DIFFICULTY_LEVELS, default = 'medium', null = False, blank = False)
 
 class Item(models.Model):
     
