@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quizpix_server',
-        'USER': 'root',
-        'PASSWORD': 'pachoi',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'quizpix',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
         'HOST':'localhost',
-        'PORT':'3306',
+        'PORT':'5432',
     }
 }
 
