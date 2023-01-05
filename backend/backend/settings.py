@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'quizpix.CustomUser'
 
-# PAGINATION
+# For Pagination purposes, uncomment when we need pagination
+# 
 # REST_FRAMEWORK = {
 #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 #     'PAGE_SIZE': 10
@@ -86,10 +87,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'quizpix',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST':'localhost',
+        'NAME': 'postgres',
+        'USER': 'quizpix_admin',
+        'PASSWORD': 'k8D9I71Munqcq5vDVJsM',
+        'HOST':'quizpix-db.clffyrjoyoai.ap-southeast-1.rds.amazonaws.com',
         'PORT':'5432',
     }
 }

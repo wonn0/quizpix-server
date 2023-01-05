@@ -26,7 +26,7 @@ router.register(r'games', GameViewSet)
 router.register(r'items', ItemViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
 ]
