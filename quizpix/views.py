@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated | AllowAny]
+    permission_classes = [AllowAny]
 
 class QuizViewSet(viewsets.ModelViewSet):
     """
@@ -33,7 +33,7 @@ class QuizViewSet(viewsets.ModelViewSet):
     """
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """
@@ -41,7 +41,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     """
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 # class GameViewSet(viewsets.ModelViewSet):
 #     """
@@ -57,4 +57,4 @@ class ItemViewSet(viewsets.ModelViewSet):
     """
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
