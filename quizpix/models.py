@@ -13,7 +13,7 @@ class CustomUser(AbstractUser):
 
     title = models.CharField(max_length = 100, default = 'QuizPix Player', null = False, blank = False)
     email = models.EmailField(unique = True, null = False, blank = False)
-    profile_picture = models.CharField(max_length = 255, null = False, blank = True)
+    profile_picture = models.ImageField(upload_to = 'uploads/', null = True)
     status = models.CharField(max_length = 100, choices = STATUS, default = 'regular')
     quizzes_made = models.IntegerField(default = 0)
     total_score = models.IntegerField(default = 0)
@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
 
 class Quiz(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
-    image = models.CharField(max_length = 255, null = False, blank = True)
+    image = models.ImageField(upload_to = 'uploads/', null = True)
     title = models.CharField(max_length = 255, null = False, blank = False, default = 'My Quiz')
 
 class Question(models.Model):
