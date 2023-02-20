@@ -16,17 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from rest_framework import routers
 from django.urls import include, path
-from quizpix.views import UserViewSet, QuizViewSet, QuestionViewSet, GameViewSet, ItemViewSet
+from quizpix.views import UserViewSet, QuizViewSet, QuestionViewSet, ItemViewSet
+# from knox import views as knox_views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'quizzes', QuizViewSet)
 router.register(r'questions', QuestionViewSet)
-router.register(r'games', GameViewSet)
+# router.register(r'games', GameViewSet)
 router.register(r'items', ItemViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

@@ -15,9 +15,9 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique = True, null = False, blank = False)
     profile_picture = models.CharField(max_length = 255, null = False, blank = True)
     status = models.CharField(max_length = 100, choices = STATUS, default = 'regular')
+    quizzes_made = models.IntegerField(default = 0)
     total_score = models.IntegerField(default = 0)
     
-
     def __str__(self):
         return self.username
 
@@ -43,17 +43,18 @@ class Question(models.Model):
         size = 3,
     )
 
-class Game(models.Model):
+# class Game(models.Model):
 
-    DIFFICULTY_LEVELS = (
-        ('easy', 'easy'),
-        ('medium', 'medium'),
-        ('hard', 'hard')
-    )
+#     DIFFICULTY_LEVELS = (
+#         ('easy', 'easy'),
+#         ('medium', 'medium'),
+#         ('hard', 'hard')
+#     )
 
-    quiz = models.ForeignKey(Quiz, on_delete = models.CASCADE)
-    game_score = models.IntegerField(default = 0)
-    difficulty = models.CharField(max_length = 100, choices = DIFFICULTY_LEVELS, default = 'medium', null = False, blank = False)
+#     quiz = models.ForeignKey(Quiz, on_delete = models.CASCADE)
+#     game_score = models.IntegerField(default = 0)
+#     difficulty = models.CharField(max_length = 100, choices = DIFFICULTY_LEVELS, default = 'medium', null = False, blank = False)
+# REMOVE THIS MODEL
 
 class Item(models.Model):
     
