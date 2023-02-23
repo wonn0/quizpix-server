@@ -1,23 +1,14 @@
-# from django.shortcuts import render
-# from django.contrib.auth import login
-# from knox import views as knox_views
-
 from quizpix.models import CustomUser, Quiz, Question, Item
 from quizpix.serializers import UserSerializer, QuizSerializer, QuestionSerializer, ItemSerializer
 
 from rest_framework import viewsets
-# from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-# from rest_framework.authtoken.serializers import AuthTokenSerializer
+
+#filtering
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 # Create your views here.
-
-# class CreateUserAPI(CreateAPIView):
-#     queryset = CustomUser.objects.all()
-#     serializer_class = CreateUserSerializer
-#     permission_classes = [permissions.AllowAny]
-
-# Authentication
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -26,6 +17,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username']
 
 class QuizViewSet(viewsets.ModelViewSet):
     """
