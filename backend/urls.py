@@ -33,6 +33,7 @@ router.register(r'items', ItemViewSet)
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('users/check_password_match/', UserViewSet.as_view({'get': 'check_password_match'}), name='check_password_match'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

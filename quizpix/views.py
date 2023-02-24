@@ -3,9 +3,11 @@ from quizpix.serializers import UserSerializer, QuizSerializer, QuestionSerializ
 
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.contrib.auth.hashers import make_password, check_password
 
 #filtering
 from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 # Create your views here.
@@ -20,6 +22,15 @@ class UserViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username']
 
+    def update(self, request, *args, **kwargs):
+        # hash the password if it is being updated
+        if 'password' in request.data and request.data['password'] != '':
+            request.data['password'] = make_password(request.data['password'])
+        else:
+            request.data.pop('password', None)
+
+        return super().update(request, *args, **kwargs)
+    
 class QuizViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
