@@ -13,7 +13,8 @@ class CustomUser(AbstractUser):
 
     title = models.CharField(max_length = 100, default = 'QuizPix Player', null = False, blank = False)
     email = models.EmailField(unique = True, null = False, blank = False)
-    profile_picture = models.ImageField(upload_to = 'uploads/', null = True)
+    # once we delete all the null pp users, set null = False, we'll be using blank instead
+    profile_picture = models.ImageField(upload_to = 'uploads/', blank = False, null = True)
     status = models.CharField(max_length = 100, choices = STATUS, default = 'regular')
     quizzes_made = models.IntegerField(default = 0)
     total_score = models.IntegerField(default = 0)

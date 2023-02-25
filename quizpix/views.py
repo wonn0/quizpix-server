@@ -3,8 +3,10 @@ from quizpix.serializers import UserSerializer, QuizSerializer, QuestionSerializ
 
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from django.contrib.auth.hashers import make_password, check_password
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
+from django.contrib.auth.hashers import make_password, check_password
 #filtering
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -29,8 +31,22 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             request.data.pop('password', None)
 
+        # If profile_picture is not included in the request, keep the original profile picture
+        if 'profile_picture' not in request.data:
+            request.data['profile_picture'] = self.get_object().profile_picture
+
         return super().update(request, *args, **kwargs)
     
+    @action(detail=False, methods=['post'])
+    def validate_password(self, request):
+        password = request.data.get('password')
+        if password:
+            user = request.user
+            is_valid = check_password(password, user.password)
+            return Response({'is_valid': is_valid})
+        else:
+            return Response({'error': 'Password not provided.'}, status=status.HTTP_400_BAD_REQUEST)
+        
 class QuizViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
