@@ -40,8 +40,9 @@ class Question(models.Model):
     question = models.CharField(max_length = 255, null = False, blank = False)
     answer = models.CharField(max_length = 255, null = False, blank = False)
     choices = ArrayField(
-        models.CharField(max_length = 255, null = True, blank = False),
+        models.CharField(max_length = 255),
         size = 3,
+        null = True, 
     )
 
 # class Game(models.Model):
