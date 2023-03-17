@@ -37,11 +37,11 @@ class Question(models.Model):
 
     quiz = models.ForeignKey(Quiz, on_delete = models.CASCADE)
     type = models.CharField(max_length = 100, choices = TYPES, null = False, blank = False)
-    question = models.CharField(max_length = 255, null = False, blank = False)
+    question = models.TextField(null = False, blank = False)
     answer = models.CharField(max_length = 255, null = False, blank = False)
     choices = ArrayField(
         models.CharField(max_length = 255),
-        size = 3,
+        size = 4,
         blank = True, 
         null = False
     )
