@@ -26,6 +26,7 @@ class Quiz(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     image = models.ImageField(upload_to = 'uploads/', null = True)
     title = models.CharField(max_length = 255, null = False, blank = False, default = 'My Quiz')
+    is_shared = models.BooleanField(default = False)
 
 class Question(models.Model):
 

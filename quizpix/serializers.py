@@ -17,9 +17,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 class QuizSerializer(serializers.HyperlinkedModelSerializer):
+    username = serializers.StringRelatedField(source='user.username', read_only=True)
     class Meta:
         model = Quiz
-        fields = ['url', 'user', 'image', 'title']
+        fields = ['url', 'user', 'username', 'image', 'title', 'is_shared',]
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

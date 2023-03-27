@@ -33,7 +33,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         # If profile_picture is not included in the request, keep the original profile picture
         if 'profile_picture' not in request.data:
-            request.data['profile_picture'] = self.get_object().profile_picture
+            if self.get_object().profile_picture:
+             request.data['profile_picture'] = self.get_object().profile_picture
 
         return super().update(request, *args, **kwargs)
     
@@ -54,6 +55,8 @@ class QuizViewSet(viewsets.ModelViewSet):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
     permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['user', 'is_shared']
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """
@@ -62,6 +65,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['quiz']
 
 # class GameViewSet(viewsets.ModelViewSet):
 #     """
