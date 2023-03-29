@@ -58,6 +58,14 @@ class QuizViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['user', 'is_shared']
 
+    def update(self, request, *args, **kwargs):
+        # If profile_picture is not included in the request, keep the original profile picture
+        if 'image' not in request.data:
+            if self.get_object().image:
+             request.data['image'] = self.get_object().image
+
+        return super().update(request, *args, **kwargs)
+
 class QuestionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
