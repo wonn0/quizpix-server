@@ -1,4 +1,4 @@
-from quizpix.models import CustomUser, Quiz, Question, Item
+from quizpix.models import CustomUser, Quiz, Question
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
@@ -31,10 +31,3 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
 #         model = Game
 #         fields = ['url', 'quiz', 'difficulty']
-
-class ItemSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Item
-        fields = ['url', 'user', 'type']
-
-# Authentication

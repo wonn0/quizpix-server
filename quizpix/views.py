@@ -1,6 +1,5 @@
-from quizpix.models import CustomUser, Quiz, Question, Item
-from quizpix.serializers import UserSerializer, QuizSerializer, QuestionSerializer, ItemSerializer
-
+from quizpix.models import CustomUser, Quiz, Question
+from quizpix.serializers import UserSerializer, QuizSerializer, QuestionSerializer
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import action
@@ -84,10 +83,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
 #     serializer_class = GameSerializer
 #     permission_classes = [permissions.IsAuthenticated]
 
-class ItemViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
-    permission_classes = [AllowAny]
+# class ItemViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
+#     permission_classes = [AllowAny]

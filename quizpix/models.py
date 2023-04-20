@@ -18,6 +18,10 @@ class CustomUser(AbstractUser):
     status = models.CharField(max_length = 100, choices = STATUS, default = 'regular')
     quizzes_made = models.IntegerField(default = 0)
     total_score = models.IntegerField(default = 0)
+    items = ArrayField(
+        models.IntegerField(default = 0),
+        size = 3,
+    )
     
     def __str__(self):
         return self.username
@@ -60,14 +64,14 @@ class Question(models.Model):
 #     difficulty = models.CharField(max_length = 100, choices = DIFFICULTY_LEVELS, default = 'medium', null = False, blank = False)
 # REMOVE THIS MODEL
 
-class Item(models.Model):
+# class Item(models.Model):
     
-    TYPES = (
-        ('bonus', 'bonus'),
-        ('redo', 'redo'),
-        ('free_pass', 'free_pass')
-    )
+#     TYPES = (
+#         ('bonus', 'bonus'),
+#         ('redo', 'redo'),
+#         ('free_pass', 'free_pass')
+#     )
 
-    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
-    quantity = models.IntegerField(default = 0)
-    type = models.CharField(max_length = 100, choices = TYPES, null = False, blank = False)
+#     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
+#     quantity = models.IntegerField(default = 0)
+#     type = models.CharField(max_length = 100, choices = TYPES, null = False, blank = False)
